@@ -12,7 +12,6 @@ function getAllFuncs(obj) {
 fs.readdir(routePath, (err, files) => {
     files.forEach(file => {
         let route = new (require(routePath+'/'+file));
-        route.initialize({});
         getAllFuncs(route).forEach((method) => {
             if (~method.indexOf('action')) {
                 let basePath = file.split('.')[0];
@@ -21,7 +20,7 @@ fs.readdir(routePath, (err, files) => {
 
                 console.log(url);
                 app.all(url, function (req, res) {
-                    route[method]();
+                    route[method](req, res);
                 });
             }
         });
