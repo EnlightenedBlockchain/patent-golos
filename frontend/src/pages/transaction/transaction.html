@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Transaction</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list inset class="login-form">
+
+	   <ion-item>
+	    <ion-input type="text" placeholder="Sender login" [(ngModel)]="from"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="text" placeholder="Reciever" [(ngModel)]="to"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="text" placeholder="Amount" [(ngModel)]="amount"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="text" placeholder="Comment" [(ngModel)]="memo"></ion-input>
+	  </ion-item>
+
+	</ion-list>
+
+	<button ion-button (click)=makeRequest()>Send GOLOS!</button>
+</ion-content>

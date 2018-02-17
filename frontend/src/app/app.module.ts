@@ -23,6 +23,7 @@ import { SupportPage } from '../pages/support/support';
 import { LoginScreenPage } from '../pages/login-screen/login-screen';
 import { LoginingPage } from '../pages/logining/logining';
 import { HomePage } from '../pages/home/home';
+import { TransactionPage } from '../pages/transaction/transaction';
 
 import { UserData } from '../providers/user-data';
 
@@ -40,7 +41,8 @@ import { UserData } from '../providers/user-data';
     SupportPage,
     LoginScreenPage,
     LoginingPage,
-    HomePage
+    HomePage,
+    TransactionPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { UserData } from '../providers/user-data';
     SupportPage,
     LoginScreenPage,
     LoginingPage,
-    HomePage
+    HomePage,
+    TransactionPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

@@ -13,7 +13,8 @@ import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { LoginScreenPage } from '../pages/login-screen/login-screen';
-
+import { HomePage } from '../pages/home/home';
+ 
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -66,7 +67,7 @@ export class ConferenceApp {
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
         if (hasSeenTutorial) {
-          this.rootPage = LoginScreenPage;
+          this.rootPage = TabsPage;
         } else {
           this.rootPage = TutorialPage;
         }
