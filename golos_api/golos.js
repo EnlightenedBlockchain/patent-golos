@@ -40,6 +40,7 @@ async function authorization (username, password) {
 async function transferGolos (wif, from, to, count, description) {
     return getAccountDetails(from)
         .then(result => {
+            console.log(result);
             if (+result.balance.split(' ')[0] < count) {
                 return false;
             }
