@@ -40,12 +40,12 @@ async function authorization (username, password) {
 async function transferGolos (wif, from, to, count, description) {
     return getAccountDetails(from)
         .then(result => {
-            console.log(result);
-            if (+result.balance.split(' ')[0] < count) {
+            debugger;
+            if (+result[0].balance.split(' ')[0] < count) {
                 return false;
             }
 
-            return golos.broadcast.transfer(wif, from, to, count + 'GOLOS', description);
+            return golos.broadcast.transfer(wif, from, to, count + ' GOLOS', description);
         });
     
 }
