@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
-
 import { TabsPage } from '../tabs-page/tabs-page';
+import { UserData } from '../../providers/user-data';
 
 @IonicPage()
 @Component({
@@ -16,17 +16,20 @@ export class LoginingPage {
   loader: any;
   toast: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public toastCtrl: ToastController, public loadCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public toastCtrl: ToastController, public loadCtrl: LoadingController, public usrData: UserData) {
   	this.loader =  this.loadCtrl.create({
       content: 'Loggining now...',
     });
   }
 
   doLogin() {
-  	let msg;
+
+	  this.navCtrl.setRoot(TabsPage);
+    this.usrData.isLoggedIn = true;
+  	/*let msg;
   	this.loader.present();
 
-  	this.http.post('/api/login/sign_in', { email: this.email, password: this.password }).subscribe( (data: any) => {
+  	this.http.post('/api/login/sign_up', { email: this.email, password: this.password }).subscribe( (data: any) => {
   		if (data.err_code) {
   			msg = 'Error ' + data.er_code + '. ' + data.message;
   			return;
@@ -43,7 +46,7 @@ export class LoginingPage {
 	    });
   		this.loader.dismiss();
   		this.toast.present();
-  	});
+  	});*/
   }
 
   ionViewDidLoad() {

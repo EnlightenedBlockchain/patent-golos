@@ -8,5 +8,25 @@
 
 
 <ion-content padding>
+	<ion-list inset class="login-form">
 
+	  <ion-item>
+	    <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="text" placeholder="First Name" [(ngModel)]="firstName"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-input type="text" placeholder="Second Name" [(ngModel)]="secondName"></ion-input>
+	  </ion-item>
+
+	</ion-list>
+
+	<button ion-button (click)=doRegister()>Sign Up!</button>
 </ion-content>
