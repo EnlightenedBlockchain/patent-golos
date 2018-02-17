@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { TabsPage } from '../tabs-page/tabs-page';
 import { UserData } from '../../providers/user-data';
 
+declare var golos: any;
+
 @IonicPage()
 @Component({
   selector: 'page-logining',
