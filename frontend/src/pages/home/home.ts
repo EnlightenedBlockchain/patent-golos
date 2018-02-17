@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginingPage } from '../logining/logining';
 
 //import * as $ from 'jquery';
 import * as golos from 'golos-js';
@@ -77,8 +78,9 @@ export class HomePage {
   }
 
   test() {
-  	var wif = golos.auth.toWif("dyadyaJora", "1", "active");
-  	console.log('WIF', wif);
+  	//var wif = golos.auth.toWif("dyadyaJora", "1", "active");
+  	//console.log('WIF', wif);
+  	this.navCtrl.push(LoginingPage);
   }
 
   ionViewDidLoad() {
