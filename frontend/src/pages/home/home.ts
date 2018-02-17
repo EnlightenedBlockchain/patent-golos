@@ -6,7 +6,7 @@ import { LoginingPage } from '../logining/logining';
 import * as golos from 'golos-js';
 
 //declare var golos: any;
-declare var ymaps: any;
+//declare var ymaps: any;
  
 @IonicPage()
 @Component({
@@ -18,9 +18,9 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	//ymaps.ready(init);
-  	var _this = this;
+  	//var _this = this;
   	console.log('=======', golos);
-    function init(){ 
+    /*function init(){ 
 	  	var element, dragger, draggerEventsGroup; 
 	  	var CustomControlClass = function (options) {
 	  		// @ts-ignore
@@ -74,7 +74,7 @@ export class HomePage {
 	            bottom: 40,
 	        }
 	    });
-    }
+    }*/
   }
 
   test() {
