@@ -5,8 +5,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginingPage } from '../logining/logining';
 import { SignupPage } from '../signup/signup';
 
-declare var golos: any;
+import * as golos from 'golos-js';
 
+@IonicPage()
 @Component({
   selector: 'page-login-screen',
   templateUrl: 'login-screen.html',
@@ -17,7 +18,7 @@ export class LoginScreenPage {
   	//this.navCtrl.setRoot(TabsPage);
         let username2 = 'dyadyaJora';
     let password2 = 'fdhgfghf';
-    golos.api.login(username2, password2, function(err, result, data) {
+    golos.api.login(username2, password2, function(err, result) {
     //console.log(err, result);
     if (!err) {
         console.log('login', result);
