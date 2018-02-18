@@ -24,43 +24,42 @@ export class Map1Page {
   ionViewDidLoad() {
 
       let mapEle = this.mapElement.nativeElement;
-      let _this = this;
 
         let map = new google.maps.Map(mapEle, {
           center: this.curLoc,
           zoom: 10
         });
 
-        let marker = new google.maps.Marker({
-          position: this.curLoc,
-          map: map,
-          title: 'Hello World!',
-          draggable: true
-        });
+        // let marker = new google.maps.Marker({
+        //   position: this.curLoc,
+        //   map: map,
+        //   title: 'Hello World!',
+        //   draggable: true
+        // });
+        //
+        // let circle = new google.maps.Circle({
+        //   strokeColor: '#FF0000',
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: '#FF0000',
+        //   fillOpacity: 0.35,
+        //   map: map,
+        //   center: this.curLoc,
+        //   radius: this.radius
+        // });
 
-        let circle = new google.maps.Circle({
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#FF0000',
-          fillOpacity: 0.35,
-          map: map,
-          center: this.curLoc,
-          radius: this.radius
-        });
-
-        google.maps.event.addListener(marker, 'drag', function(e) 
-        {
-           _this.curLoc.lat = e.latLng.lat();
-           _this.curLoc.lng = e.latLng.lng();
-           circle.setCenter(_this.curLoc);
-        });
-
-        google.maps.event.addListener(marker, 'dragend', function() 
-        {
-          if (_this.userData.isSeller)
-            _this.showConfirm();
-        });
+        // google.maps.event.addListener(marker, 'drag', function(e)
+        // {
+        //    _this.curLoc.lat = e.latLng.lat();
+        //    _this.curLoc.lng = e.latLng.lng();
+        //    circle.setCenter(_this.curLoc);
+        // });
+        //
+        // google.maps.event.addListener(marker, 'dragend', function()
+        // {
+        //   if (_this.userData.isSeller)
+        //     _this.showConfirm();
+        // });
 
         google.maps.event.addListenerOnce(map, 'idle', () => {
           mapEle.classList.add('show-map');
@@ -76,11 +75,21 @@ export class Map1Page {
         result.forEach((item) => {
           let data = JSON.parse(item.json_metadata);
           let loc = data.location.split(',');
-          new google.maps.Marker({
+          let mrk = new google.maps.Marker({
               position: {lat: +loc[0], lng: +loc[1]},
               map: map,
-              title: 'Hello World!',
               draggable: false
+          });
+
+          let contentString = `Telegram name<br>{{item.author}}<b> </b><br>
+                    Sum<br><b> </b><br>
+                    Radius<br><b> </b><br>
+                    <p style="text-align: center"><button> Add to list </button></p>`;
+          let infowindow = new google.maps.InfoWindow({
+              content: contentString
+          });
+          mrk.addListener('click', () => {
+              infowindow.open(map, mrk);
           });
         });
       });
