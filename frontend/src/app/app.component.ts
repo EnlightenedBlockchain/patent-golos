@@ -11,6 +11,7 @@ import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
+import { TransHistoryPage } from '../pages/trans-history/trans-history';
 import { SupportPage } from '../pages/support/support';
 //import { LoginScreenPage } from '../pages/login-screen/login-screen';
 //import { HomePage } from '../pages/home/home';
@@ -41,7 +42,9 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageInterface[] = [
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
+    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
+
+    { title: 'Trahssaction History', name: 'TabsPage', component: TabsPage, tabComponent: TransHistoryPage, index: 4, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
