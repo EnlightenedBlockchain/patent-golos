@@ -1,9 +1,9 @@
-const Provider = require('./golos-provider');
+const Provider = require('./golos');
 const golos = require('golos-js');
 const log = console.log;
 
-const username = 'test';
-const password = 'test';
+const username = 'pahatrop';
+const password = 'P5KJ2Ea3zTMbySuM7Lu6LyevxpMVCF9346QBy5AepbzDt9XspayK';
 
 
 return Provider.authorization(username, password)
@@ -17,5 +17,5 @@ return Provider.authorization(username, password)
             'test'
         );
     })
-    .then(result => console.log(result))
-    .catch(err => console.log(err));
+    .then(result => console.log(1, result))
+    .catch(err => console.log(1, err));

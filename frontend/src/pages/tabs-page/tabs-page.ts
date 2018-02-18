@@ -4,14 +4,14 @@ import { NavParams, NavController } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { MapPage } from '../map/map';
-import { HomePage } from '../home/home';
 import { TransactionPage } from '../transaction/transaction';
+import {Map1Page} from "../map1/map";
 @Component({
   templateUrl: 'tabs-page.html'
 })
 export class TabsPage {
   // set the root pages for each tab
-  tab1Root: any = HomePage;
+  tab1Root: any = Map1Page;
   tab2Root: any = TransactionPage; 
   tab3Root: any = MapPage;
   tab4Root: any = AboutPage;

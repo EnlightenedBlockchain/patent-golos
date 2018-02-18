@@ -4,14 +4,15 @@ import { AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 
-declare var google: any;
+declare let google: any;
 
+import * as golos from 'golos-js';
 
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
-export class MapPage {
+export class Map1Page {
   curLoc: any;
   radius: number = 10000;
 
@@ -37,7 +38,7 @@ export class MapPage {
           draggable: true
         });
 
-        var circle = new google.maps.Circle({
+        let circle = new google.maps.Circle({
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
           strokeWeight: 2,
@@ -60,25 +61,29 @@ export class MapPage {
           if (_this.userData.isSeller)
             _this.showConfirm();
         });
-        /*mapData.forEach((markerData: any) => {
-          let infoWindow = new google.maps.InfoWindow({
-            content: `<h5>${markerData.name}</h5>`
-          });
-
-          let marker = new google.maps.Marker({
-            position: markerData,
-            map: map,
-            title: markerData.name
-          });
-
-          marker.addListener('click', () => {
-            infoWindow.open(map, marker);
-          });
-        });*/
 
         google.maps.event.addListenerOnce(map, 'idle', () => {
           mapEle.classList.add('show-map');
         });
+
+      let query = {
+        select_tags: ['hackatonsimferopol'],
+          limit: 100
+      };
+
+      golos.api.getDiscussionsByTrending(query, (err, result) => {
+        console.log(err, result);
+        result.forEach((item) => {
+          let data = JSON.parse(item.json_metadata);
+          let loc = data.location.split(',');
+          new google.maps.Marker({
+              position: {lat: +loc[0], lng: +loc[1]},
+              map: map,
+              title: 'Hello World!',
+              draggable: false
+          });
+        });
+      });
   }
 
   showConfirm() {

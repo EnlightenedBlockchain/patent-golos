@@ -50,9 +50,13 @@ async function transferGolos (wif, from, to, count, description) {
     
 }
 
+async function set() {
+
+}
+
 module.exports = {
     getPrivateKeys,
     authorization,
     getAccountDetails,
     transferGolos
-}
+};

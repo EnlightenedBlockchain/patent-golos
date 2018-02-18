@@ -22,11 +22,11 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { LoginScreenPage } from '../pages/login-screen/login-screen';
 import { LoginingPage } from '../pages/logining/logining';
-import { HomePage } from '../pages/home/home';
 import { TransactionPage } from '../pages/transaction/transaction';
 
 import { UserData } from '../providers/user-data';
 import { GolosApiProvider } from '../providers/golos-api/golos-api';
+import {Map1Page} from "../pages/map1/map";
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { GolosApiProvider } from '../providers/golos-api/golos-api';
     SupportPage,
     LoginScreenPage,
     LoginingPage,
-    HomePage,
+    Map1Page,
     TransactionPage
   ],
   imports: [
@@ -68,6 +68,7 @@ import { GolosApiProvider } from '../providers/golos-api/golos-api';
     AboutPage,
     AccountPage,
     MapPage,
+    Map1Page,
     PopoverPage,
     SignupPage,
     TabsPage,
@@ -75,7 +76,6 @@ import { GolosApiProvider } from '../providers/golos-api/golos-api';
     SupportPage,
     LoginScreenPage,
     LoginingPage,
-    HomePage,
     TransactionPage
   ],
   providers: [
