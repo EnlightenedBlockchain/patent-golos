@@ -3,22 +3,27 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-
 @Injectable()
 export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
   isLoggedIn: boolean = false;
-
+  username: string;
+  wif: string;
+  myLoc: any;
+  isSeller: boolean;
+ 
   constructor(
     public events: Events,
     public storage: Storage
   ) {}
 
-  login(username: string): void {
+  login(username: string, wif: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
+    this.storage.set('wif', wif);
+    this.isLoggedIn = true;
     this.events.publish('user:login');
   };
 
@@ -36,6 +41,7 @@ export class UserData {
 
   setUsername(username: string): void {
     this.storage.set('username', username);
+    this.username = username;
   };
 
   getUsername(): Promise<string> {

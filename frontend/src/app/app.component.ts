@@ -12,10 +12,11 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
-//import { LoginScreenPage } from '../pages/login-screen/login-screen';
+import { LoginScreenPage } from '../pages/login-screen/login-screen';
 //import { HomePage } from '../pages/home/home';
  
 import { UserData } from '../providers/user-data';
+import { GolosApiProvider } from '../providers/golos-api/golos-api';
 
 export interface PageInterface {
   title: string;
@@ -32,13 +33,8 @@ export interface PageInterface {
   templateUrl: 'app.template.html'
 })
 export class ConferenceApp {
-  // the root nav is a child of the root app component
-  // @ViewChild(Nav) gets a reference to the app's root nav
   @ViewChild(Nav) nav: Nav;
 
-  // List of pages that can be navigated to from the left menu
-  // the left menu only works after login
-  // the login page disables the left menu
   appPages: PageInterface[] = [
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
@@ -53,6 +49,8 @@ export class ConferenceApp {
     { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
+  _username: string;
+  _wif: string;
 
   constructor(
     public events: Events,
@@ -60,25 +58,30 @@ export class ConferenceApp {
     public menu: MenuController,
     public platform: Platform,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public golos: GolosApiProvider
   ) {
+    this.rootPage = LoginScreenPage;
 
-    // Check if the user has already seen the tutorial
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
-        } else {
+        if (!hasSeenTutorial) {
           this.rootPage = TutorialPage;
+        } else {
+          this.checkIsLoggedIn().then( logged => {
+            if (logged) {
+              this.rootPage = TabsPage;
+              this.userData.login(this._username, this._wif);
+              this.userData.isLoggedIn = true;
+            }
+
+            this.platformReady();
+          });
+
+          return;
         }
         this.platformReady()
       });
-
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
-    this.enableMenu(true);
 
     this.listenToLoginEvents();
   }
@@ -86,27 +89,19 @@ export class ConferenceApp {
   openPage(page: PageInterface) {
     let params = {};
 
-    // the nav component was found using @ViewChild(Nav)
-    // setRoot on the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
     if (page.index) {
       params = { tabIndex: page.index };
     }
 
-    // If we are already on tabs just change the selected tab
-    // don't setRoot again, this maintains the history stack of the
-    // tabs even if changing them from the menu
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
-      // Set the root of the nav with params if it's a tab index
       this.nav.setRoot(page.name, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
       });
     }
 
     if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
       this.userData.logout();
     }
   }
@@ -117,25 +112,19 @@ export class ConferenceApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
+
     });
 
     this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
+
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+
     });
   }
 
-  enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
-
   platformReady() {
-    // Call any initial plugins when ready
     this.platform.ready().then(() => {
       this.splashScreen.hide();
     });
@@ -144,7 +133,6 @@ export class ConferenceApp {
   isActive(page: PageInterface) {
     let childNav = this.nav.getActiveChildNavs()[0];
 
-    // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
         return 'primary';
@@ -156,5 +144,25 @@ export class ConferenceApp {
       return 'primary';
     }
     return;
+  }
+
+  checkIsLoggedIn(): Promise<any> {
+    let _err = false;
+    return this.storage.get('username').then( username => {
+      this._username = username;
+
+      if (!username) _err = true;
+
+      return this.storage.get('wif');
+    }).then( wif => {
+      this._wif = wif;
+
+      if (!wif) _err = true;
+
+      return this.golos.verifySavedLogin(this._username, this._wif);
+      // TODO golos-provider.verify
+      //          this.isLoggedIn = true;
+      //          else -> this.storage.set('username', ''); this.storage.set('wif', ''); 
+    });
   }
 }
