@@ -83,10 +83,14 @@ export class Map1Page {
               disableDefaultUI: true
           });
 
+
           let contentString = `User: <b>${item.author}</b><br>
                     Telegram name <b>${data.telegram}</b><br>
-                    Radius<br><b> </b>${data.radius} km<br>
-                    <p style="text-align: center"><button> Add to list </button></p>`;
+                    Radius<b> ${data.radius} m</b><br>
+                    <p style="text-align: center">
+                        <button> Add to list </button>
+                        <button> Send coin </button>
+                    </p>`;
           let infowindow = new google.maps.InfoWindow({
               content: contentString
           });
