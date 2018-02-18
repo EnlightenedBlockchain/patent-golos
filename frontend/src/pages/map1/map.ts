@@ -74,16 +74,18 @@ export class Map1Page {
         console.log(err, result);
         result.forEach((item) => {
           let data = JSON.parse(item.json_metadata);
+          if(!data.active) return;
           let loc = data.location.split(',');
           let mrk = new google.maps.Marker({
               position: {lat: +loc[0], lng: +loc[1]},
               map: map,
-              draggable: false
+              draggable: false,
+              disableDefaultUI: true
           });
 
-          let contentString = `Telegram name<br>{{item.author}}<b> </b><br>
-                    Sum<br><b> </b><br>
-                    Radius<br><b> </b><br>
+          let contentString = `User: <b>${item.author}</b><br>
+                    Telegram name <b>${data.telegram}</b><br>
+                    Radius<br><b> </b>${data.radius} km<br>
                     <p style="text-align: center"><button> Add to list </button></p>`;
           let infowindow = new google.maps.InfoWindow({
               content: contentString
