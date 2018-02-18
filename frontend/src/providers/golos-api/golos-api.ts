@@ -44,6 +44,11 @@ export class GolosApiProvider {
   login(email:string, pswd: string): Promise<any> {
 	let wif = golos.auth.toWif(email, pswd, 'active');
 
+
+	let keys = golos.auth.getPrivateKeys(email, pswd);
+
+	this.storage.set('keys', keys);
+
 	return new Promise( resolve => {
 	  	this.verifySavedLogin(email, wif).then( data => {
 	  		resolve({ flag: data, wif: wif });
@@ -57,16 +62,21 @@ export class GolosApiProvider {
   		radius: radius,
   		type: 'seller_activated',
   		active: true,
+  		telegram: 'pahatrop',
   		date: new Date().toISOString()
   	};
 
-  	this.storage.get('wif_post'). then( key => {
-  		let postWif = key;
+  	this.storage.get('keys'). then( keys => {
+  		let postWif = keys.posting;
+  		let permalink = 'want-be-seller-'+ new Date().getTime();
 
-
-  		golos.broadcast.comment(postWif, '', 'hackaton2018SMF', username, 'test-url', 'TITLE', 'Получен статус SELLER на нашем ресурсе.', JSON.stringify(meta), function(err, res) {
+  		golos.broadcast.comment(postWif, '', 'hackatonsimferopol', username, permalink, 'TITLE', 'Получен статус SELLER на нашем ресурсе.', JSON.stringify(meta), function(err, res) {
 	  		console.log(err, res);
 	  	});
+
+	  	/* golos.broadcast.comment(postWif, 'dyadyajora', 'hackaton', username, 'test-urlsjfgsjgfjsgfjf', 'TITLE', 'Получен статус SELLER на нашем ресурсе.', JSON.stringify(meta), function(err, res) {
+	  		console.log(err, res);
+	  	});*/
   	});
   	
   }

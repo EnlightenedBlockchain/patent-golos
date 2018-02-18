@@ -3,6 +3,7 @@ import { AlertController } from 'ionic-angular';
 
 import { Platform } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
+import { GolosApiProvider } from '../../providers/golos-api/golos-api';
 
 declare var google: any;
 
@@ -16,7 +17,7 @@ export class MapPage {
   radius: number = 10000;
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public platform: Platform, public userData: UserData, private alertCtrl: AlertController) {
+  constructor(public platform: Platform, public userData: UserData, private alertCtrl: AlertController, public golos: GolosApiProvider) {
     this.curLoc = {lat: 45.0, lng: 34.000};
   }
 
@@ -94,6 +95,8 @@ export class MapPage {
           handler: () => {
             // TODO шлем данные  в голос
             this.userData.isSeller = true;
+
+            this.golos.becomeSeller(this.userData.username, this.curLoc.lat+','+this.curLoc.lng, this.radius);
           }
         },
         {
