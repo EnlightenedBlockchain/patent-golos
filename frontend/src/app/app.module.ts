@@ -26,6 +26,7 @@ import { HomePage } from '../pages/home/home';
 import { TransactionPage } from '../pages/transaction/transaction';
 
 import { UserData } from '../providers/user-data';
+import { GolosApiProvider } from '../providers/golos-api/golos-api';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { UserData } from '../providers/user-data';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    GolosApiProvider
   ]
 })
 export class AppModule { }
