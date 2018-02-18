@@ -60,7 +60,6 @@ export class GolosApiProvider {
   		date: new Date().toISOString()
   	};
 
-  	meta = {};
   	this.storage.get('wif_post'). then( key => {
   		let postWif = key;
 

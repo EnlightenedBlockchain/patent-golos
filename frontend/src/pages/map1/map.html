@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Map</ion-title>
+  <ion-toggle  checked="false" color="secondary" [(ngModel)]="userData.isSeller" (click)=showConfirm()></ion-toggle>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="map-page">
+  <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div>
+</ion-content>
