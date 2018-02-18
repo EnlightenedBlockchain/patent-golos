@@ -11,9 +11,10 @@ import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
+import { TransHistoryPage } from '../pages/trans-history/trans-history';
 import { SupportPage } from '../pages/support/support';
-import { LoginScreenPage } from '../pages/login-screen/login-screen';
-import { HomePage } from '../pages/home/home';
+//import { LoginScreenPage } from '../pages/login-screen/login-screen';
+//import { HomePage } from '../pages/home/home';
  
 import { UserData } from '../providers/user-data';
 
@@ -113,6 +114,10 @@ export class ConferenceApp {
 
   openTutorial() {
     this.nav.setRoot(TutorialPage);
+  }
+
+  openTransHistory() {
+    this.nav.setRoot(TransHistoryPage);
   }
 
   listenToLoginEvents() {

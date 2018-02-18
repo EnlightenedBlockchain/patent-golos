@@ -1,7 +1,7 @@
 <ion-split-pane>
 
   <!-- logged in menu -->
-  <ion-menu id="loggedInMenu" [content]="content" *ngIf="userData.isLoggedIn">
+  <ion-menu id="loggedOutMenu" [content]="content" *ngIf="true">
 
     <ion-header>
       <ion-toolbar>
@@ -38,6 +38,16 @@
         <button ion-item menuClose (click)="openTutorial()">
           <ion-icon item-start name="hammer"></ion-icon>
           Show Tutorial
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Transaction History
+        </ion-list-header>
+        <button ion-item menuClose (click)="openTransHistory()">
+          <ion-icon item-start name="hammer"></ion-icon>
+          Show History
         </button>
       </ion-list>
 

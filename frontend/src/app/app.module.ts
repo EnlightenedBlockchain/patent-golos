@@ -24,7 +24,7 @@ import { LoginScreenPage } from '../pages/login-screen/login-screen';
 import { LoginingPage } from '../pages/logining/logining';
 import { HomePage } from '../pages/home/home';
 import { TransactionPage } from '../pages/transaction/transaction';
-
+import { TransHistoryPage } from '../pages/trans-history/trans-history';
 import { UserData } from '../providers/user-data';
 
 
@@ -42,7 +42,8 @@ import { UserData } from '../providers/user-data';
     LoginScreenPage,
     LoginingPage,
     HomePage,
-    TransactionPage
+    TransactionPage,
+    TransHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -56,6 +57,7 @@ import { UserData } from '../providers/user-data';
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
+        { component: TransHistoryPage, name: 'TransHistoryPage', segment: 'trans-history' },
         //{ component: SignupPage, name: 'SignupPage', segment: 'signup' }
       ]
     }),
@@ -75,7 +77,8 @@ import { UserData } from '../providers/user-data';
     LoginScreenPage,
     LoginingPage,
     HomePage,
-    TransactionPage
+    TransactionPage,
+    TransHistoryPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
