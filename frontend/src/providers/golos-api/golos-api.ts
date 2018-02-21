@@ -17,9 +17,9 @@ export class GolosApiProvider {
 
   	return new Promise( resolve => {
 	  	golos.api.getAccounts([login], function(err, response) {
-	  		if ( ! err) {
-				var privWif = wif; 
-				var resultWifToPublic = golos.auth.wifToPublic(privWif);
+	  		if (! err) {
+				let privWif:string = wif; 
+				let resultWifToPublic:string = golos.auth.wifToPublic(privWif);
 				if (!response.length) {
 					resolve(false);
 					return;

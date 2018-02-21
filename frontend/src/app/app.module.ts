@@ -23,6 +23,8 @@ import { SupportPage } from '../pages/support/support';
 import { LoginScreenPage } from '../pages/login-screen/login-screen';
 import { LoginingPage } from '../pages/logining/logining';
 import { TransactionPage } from '../pages/transaction/transaction';
+import { HomePage } from '../pages/home/home';
+import { ActiveTransactionsPage } from '../pages/active-transactions/active-transactions';
 
 import { UserData } from '../providers/user-data';
 import { GolosApiProvider } from '../providers/golos-api/golos-api';
@@ -43,7 +45,9 @@ import {Map1Page} from "../pages/map1/map";
     LoginScreenPage,
     LoginingPage,
     Map1Page,
-    TransactionPage
+    TransactionPage,
+    ActiveTransactionsPage,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,9 @@ import {Map1Page} from "../pages/map1/map";
     SupportPage,
     LoginScreenPage,
     LoginingPage,
-    TransactionPage
+    TransactionPage,
+    ActiveTransactionsPage,
+    HomePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

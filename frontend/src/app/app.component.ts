@@ -65,9 +65,10 @@ export class ConferenceApp {
 
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
-        if (!hasSeenTutorial) {
+        console.log(hasSeenTutorial);
+        /*if (!hasSeenTutorial) {
           this.rootPage = TutorialPage;
-        } else {
+        } else {*/
           this.checkIsLoggedIn().then( logged => {
             if (logged) {
               this.rootPage = TabsPage;
@@ -79,8 +80,8 @@ export class ConferenceApp {
           });
 
           return;
-        }
-        this.platformReady()
+        /*}
+        this.platformReady()*/
       });
 
     this.listenToLoginEvents();
